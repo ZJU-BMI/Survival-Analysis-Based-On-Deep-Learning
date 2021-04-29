@@ -186,7 +186,7 @@ def train_model_mimic_all(hidden_size, learning_rate, l2_regularization, time_wi
             contrast_loss2 = -tf.reduce_mean(
                 contrast_loss_trajectory_generation_numerator - tf.math.log(contrast_loss_trajectory_generation_denominator)) - tf.reduce_mean(
                 contrast_loss_trajectory_generation_numerator2 - tf.math.log(contrast_loss_trajectory_generation_denominator2))
-            whole_loss = clf_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01 + contrast_loss2*0.1
+            whole_loss = survival_prediction_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01 + contrast_loss2*0.1
             encoder_variables = [var for var in encoder.trainable_variables]
             for weight in encoder.trainable_variables:
                 whole_loss += tf.keras.regularizers.l2(l2_regularization)(weight)
@@ -372,7 +372,7 @@ def train_model_mimic_timelstm1(hidden_size, learning_rate, l2_regularization, t
                                                       axis=1) - contrast_loss_numerator2
 
             contrast_loss = -tf.reduce_mean(contrast_loss_numerator - tf.math.log(contrast_loss_denominator))-tf.reduce_mean(contrast_loss_numerator2 - tf.math.log(contrast_loss_denominator2))
-            whole_loss = clf_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
+            whole_loss = survival_prediction_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
             encoder_variables = [var for var in encoder.trainable_variables]
             for weight in encoder.trainable_variables:
                 whole_loss += tf.keras.regularizers.l2(l2_regularization)(weight)
@@ -559,7 +559,7 @@ def train_model_mimic_timelstm2(hidden_size, learning_rate, l2_regularization, t
                                                       axis=1) - contrast_loss_numerator2
 
             contrast_loss = -tf.reduce_mean(contrast_loss_numerator - tf.math.log(contrast_loss_denominator))-tf.reduce_mean(contrast_loss_numerator2 - tf.math.log(contrast_loss_denominator2))
-            whole_loss = clf_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
+            whole_loss = survival_prediction_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
             encoder_variables = [var for var in encoder.trainable_variables]
             for weight in encoder.trainable_variables:
                 whole_loss += tf.keras.regularizers.l2(l2_regularization)(weight)
@@ -746,7 +746,7 @@ def train_model_mimic_timelstm3(hidden_size, learning_rate, l2_regularization, t
                                                       axis=1) - contrast_loss_numerator2
 
             contrast_loss = -tf.reduce_mean(contrast_loss_numerator - tf.math.log(contrast_loss_denominator))-tf.reduce_mean(contrast_loss_numerator2 - tf.math.log(contrast_loss_denominator2))
-            whole_loss = clf_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
+            whole_loss = survival_prediction_loss + gen_mse_loss * 0.3 + neg_likelihood_loss * 1 + contrast_loss * 0.01
             encoder_variables = [var for var in encoder.trainable_variables]
             for weight in encoder.trainable_variables:
                 whole_loss += tf.keras.regularizers.l2(l2_regularization)(weight)
